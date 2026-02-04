@@ -18,7 +18,8 @@
 		Topmost="True"
 		ShowActivated="True"
 	    WindowStartupLocation="CenterScreen"
-        Icon="{Binding WindowIcon}">
+        Icon="{Binding WindowIcon}"
+        ShowInTaskbar="False">
 
 	<Design.DataContext>
 		<fakes:FakePromptForAccessViewModel />

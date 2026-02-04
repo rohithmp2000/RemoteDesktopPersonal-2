@@ -12,7 +12,8 @@
         Topmost="True"
 		x:DataType="vm:IFileTransferWindowViewModel"
 		x:Name="FileTransferWindowRef"
-        Icon="{Binding WindowIcon}">
+        Icon="{Binding WindowIcon}"
+        ShowInTaskbar="False">
 
 	<Design.DataContext>
 		<fakes:FakeFileTransferViewModel />

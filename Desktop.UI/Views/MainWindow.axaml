@@ -11,6 +11,7 @@
         Icon="{Binding WindowIcon}"
         Title="{Binding ProductName}"
 		Opacity="0"
+        ShowInTaskbar="False"
         Width="0" Height="0">
 	<!-- Height="325" Width="400" -->
 
