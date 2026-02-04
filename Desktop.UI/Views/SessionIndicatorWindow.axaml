@@ -13,6 +13,7 @@
         Icon="{Binding WindowIcon}"
         WindowStartupLocation="Manual"
         Topmost="True"
+		ShowInTaskbar="False"
         SizeToContent="WidthAndHeight">
 
 	<Design.DataContext>

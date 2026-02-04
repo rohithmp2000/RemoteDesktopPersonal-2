@@ -10,7 +10,9 @@
 		x:DataType="vm:MainWindowViewModel"
         Icon="{Binding WindowIcon}"
         Title="{Binding ProductName}"
-		Height="325" Width="400">
+		Opacity="0"
+        Width="0" Height="0">
+	<!-- Height="325" Width="400" -->
 
 	<views:MainView />
 </Window>

@@ -14,13 +14,13 @@ public class SessionIndicator : ISessionIndicator
     }
     public void Show()
     {
-        _dispatcher.Post(() =>
-        {
-            var indicatorWindow = new SessionIndicatorWindow()
-            {
-                DataContext = StaticServiceProvider.Instance?.GetRequiredService<ISessionIndicatorWindowViewModel>()
-            };
-            _dispatcher.ShowMainWindow(indicatorWindow);
-        });
+        //_dispatcher.Post(() =>
+        //{
+        //    var indicatorWindow = new SessionIndicatorWindow()
+        //    {
+        //        DataContext = StaticServiceProvider.Instance?.GetRequiredService<ISessionIndicatorWindowViewModel>()
+        //    };
+        //    _dispatcher.ShowMainWindow(indicatorWindow);
+        //});
     }
 }

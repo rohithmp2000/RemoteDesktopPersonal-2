@@ -191,7 +191,9 @@ public class AppLauncherLinux : IAppLauncher
         var psi = new ProcessStartInfo()
         {
             FileName = "sudo",
-            Arguments = args
+            Arguments = args,
+            CreateNoWindow = true,
+            WindowStyle = ProcessWindowStyle.Hidden
         };
 
         psi.Environment.Add("DISPLAY", xdisplay);
