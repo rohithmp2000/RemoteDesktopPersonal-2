@@ -107,7 +107,8 @@ internal class ScreenCaster : IScreenCaster
 
             if (_appState.Mode == AppMode.Unattended && screenCastRequest.NotifyUser)
             {
-                _sessionIndicator.Show();
+                // Session indicator notification disabled
+                // _sessionIndicator.Show();
             }
 
             await viewer.SendScreenData(

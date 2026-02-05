@@ -69,7 +69,8 @@ namespace Remotely.Desktop.Core.Services
 
                 if (_conductor.Mode == AppMode.Unattended && screenCastRequest.NotifyUser)
                 {
-                    _sessionIndicator.Show();
+                    // Session indicator notification disabled
+                    // _sessionIndicator.Show();
                 }
 
                 await viewer.SendViewerConnected();

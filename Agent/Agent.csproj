@@ -15,6 +15,10 @@
     <AssemblyName>Remotely_Agent</AssemblyName>
     <ApplicationIcon>Assets\favicon.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
+    <StartupObject>Remotely.Agent.Program.Main</StartupObject>
+    <WindowsService>true</WindowsService>
+    <ServiceName>RemotelyAgent</ServiceName>
+    <ServiceDescription>Remotely Agent Service</ServiceDescription>
   </PropertyGroup>
 
   <ItemGroup>
