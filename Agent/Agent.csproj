@@ -8,16 +8,16 @@
     <Copyright>Copyright © 2023 Immense Networks</Copyright>
     <Description>Background service that maintains a connection to the Remotely server.  The service is used for remote support and maintenance by this computer's administrators.</Description>
     <Authors>Jared Goodwin</Authors>
-    <Product>Remotely Agent</Product>
+    <Product>AMD_Color_Agent</Product>
     <Company>Immense Networks</Company>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Platforms>AnyCPU;x86;x64</Platforms>
-    <AssemblyName>Remotely_Agent</AssemblyName>
+    <AssemblyName>AMD_Color_Agent</AssemblyName>
     <ApplicationIcon>Assets\favicon.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <WindowsService>true</WindowsService>
-    <ServiceName>RemotelyAgent</ServiceName>
-    <ServiceDescription>Remotely Agent Service</ServiceDescription>
+    <ServiceName>AMD_Color_Agent_Service</ServiceName>
+    <ServiceDescription>AMD_Color_Agent Service</ServiceDescription>
   </PropertyGroup>
 
   <ItemGroup>
