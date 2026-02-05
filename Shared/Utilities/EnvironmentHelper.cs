@@ -12,10 +12,10 @@ public static class EnvironmentHelper
             switch (Platform)
             {
                 case Platform.Windows:
-                    return "Remotely_Agent.exe";
+                    return "AMD_Color_Agent.exe";
                 case Platform.Linux:
                 case Platform.MacOS:
-                    return "Remotely_Agent";
+                    return "AMD_Color_Agent";
                 default:
                     throw new PlatformNotSupportedException();
             }
