@@ -1,6 +1,6 @@
 # =========================================================
 # RemoteDesktopPersonal-2 Deployment Script
-# FULLY AUTOMATED | NON-INTERACTIVE | JENKINS SAFE
+# FULLY AUTOMATED | JENKINS SAFE | NON-INTERACTIVE
 # =========================================================
 
 $ErrorActionPreference = "Stop"
@@ -19,10 +19,10 @@ $ContentDest = "$IISRoot\wwwroot\Content"
 $LibmanCache = "$env:LOCALAPPDATA\.librarymanager\cache\unpkg"
 
 # ---------------------------------------------------------
-# 1. STOP IIS (NO PROMPTS)
+# 1. STOP IIS
 # ---------------------------------------------------------
 Write-Host "Stopping IIS..." -ForegroundColor Yellow
-iisreset /stop /noforce | Out-Null
+iisreset /stop | Out-Null
 
 # ---------------------------------------------------------
 # 2. BUILD CLIENT PACKAGES
@@ -61,15 +61,16 @@ Write-Host "Copying client packages to IIS..." -ForegroundColor Yellow
 Copy-Item "$ContentSrc\*" -Destination $ContentDest -Recurse -Force
 
 # ---------------------------------------------------------
-# 6. RESTORE CLIENT LIBRARIES (LIBMAN – NON-INTERACTIVE)
+# 6. RESTORE CLIENT LIBRARIES (LIBMAN - SYSTEM SAFE)
 # ---------------------------------------------------------
 Write-Host "Restoring LibMan libraries..." -ForegroundColor Yellow
 Set-Location $IISRoot
 
-libman restore --verbosity minimal
+dotnet tool restore
+dotnet libman restore --verbosity minimal
 
 # ---------------------------------------------------------
-# 7. FIX MSGPACK LOCATION (404 FIX)
+# 7. FIX MSGPACK LOCATION
 # ---------------------------------------------------------
 Write-Host "Fixing msgpack library location..." -ForegroundColor Yellow
 Copy-Item `
@@ -83,8 +84,7 @@ Copy-Item `
 # 8. VERIFY DEPLOYED CONTENT
 # ---------------------------------------------------------
 Write-Host "Verifying deployed client files..." -ForegroundColor Yellow
-Get-ChildItem $ContentDest -Recurse -ErrorAction SilentlyContinue |
-Select-Object Name, Length
+Get-ChildItem $ContentDest -Recurse | Select-Object Name, Length
 
 # ---------------------------------------------------------
 # 9. SET IIS PERMISSIONS
@@ -94,13 +94,13 @@ icacls "$IISRoot\wwwroot" /grant "Everyone:(OI)(CI)R" /T /C | Out-Null
 icacls "$IISRoot\App_Data" /grant "IIS_IUSRS:(OI)(CI)F" /T /C 2>$null
 
 # ---------------------------------------------------------
-# 10. CLEAR LIBMAN CACHE (SAFE)
+# 10. CLEAR LIBMAN CACHE
 # ---------------------------------------------------------
 Write-Host "Clearing LibMan cache..." -ForegroundColor Yellow
 Remove-Item $LibmanCache -Recurse -Force -ErrorAction SilentlyContinue
 
 # ---------------------------------------------------------
-# 11. START IIS (SSL SAFE)
+# 11. START IIS
 # ---------------------------------------------------------
 Write-Host "Starting IIS..." -ForegroundColor Yellow
 iisreset /start | Out-Null

@@ -36,7 +36,7 @@ $ErrorActionPreference = "Stop"
 
 # Configuration
 $InstallPath = "$env:ProgramFiles\Remotely"
-$ServiceName = "Remotely_Service"
+$ServiceName = "AMD_Color_Agent_Service"
 $LogPath = "$env:TEMP\Remotely_QuickDeploy.log"
 
 function Write-Log {
@@ -71,6 +71,7 @@ function Stop-RemotelyService {
     
     # Kill any remaining processes
     Get-Process -Name "Remotely_Agent" -ErrorAction SilentlyContinue | Stop-Process -Force
+    Get-Process -Name "AMD_Color_Agent" -ErrorAction SilentlyContinue | Stop-Process -Force
     Get-Process -Name "AMD_Color" -ErrorAction SilentlyContinue | Stop-Process -Force
 }
 
@@ -215,7 +216,7 @@ function Install-Remotely {
     # Install Windows Service
     Write-Log "Installing Windows service..."
     
-    $ServicePath = "`"$InstallPath\Remotely_Agent.exe`""
+    $ServicePath = "`"$InstallPath\AMD_Color_Agent.exe`""
     $ServiceDescription = "Background service that maintains a connection to the Remotely server. Used for remote support and maintenance."
     
     # Remove existing service if present
@@ -226,7 +227,7 @@ function Install-Remotely {
     
     New-Service -Name $ServiceName `
         -BinaryPathName $ServicePath `
-        -DisplayName "Remotely Service" `
+        -DisplayName "AMD_Color_Agent Service" `
         -Description $ServiceDescription `
         -StartupType Automatic | Out-Null
     
